@@ -37,6 +37,7 @@ class MovieHolder :
             }
             movieAdapter.setList(item.infos ?: emptyList())
             movieAdapter.notifyDataSetChanged()
+
         }
     }
 

@@ -3,14 +3,11 @@ package com.example.dominictoretto
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dominictoretto.databinding.LogoBinding
-import com.example.dominictoretto.databinding.MoviePageHolderBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class LogoActivity : AppCompatActivity() {
     private lateinit var binding: LogoBinding
@@ -26,7 +23,7 @@ class LogoActivity : AppCompatActivity() {
             delay(3000)
 
             if(savedText.isNullOrEmpty()){
-                val intent = Intent(this@LogoActivity, MainActivity::class.java)
+                val intent = Intent(this@LogoActivity, LoginActivity::class.java)
                 startActivity(intent)
             } else {
                 val intent = Intent(this@LogoActivity, MovieActivity::class.java)

@@ -35,29 +35,11 @@ class MovieAdapter() :
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val item = list[position]
-        val api = Api()
         holder.binding.apply {
             movieImage.loadImage(item.image)
             movieEpisode.isVisible = item.is_episode
             movieTitle.isVisible = !item.name.isNullOrBlank()
             movieTitle.text = item.name
-
-            api.getMovieInfo(object : Callback<com.example.dominictoretto.data.MovieInfo> {
-                override fun onResponse(call: Call<com.example.dominictoretto.data.MovieInfo>, response: Response<com.example.dominictoretto.data.MovieInfo>) {
-                    if (response.isSuccessful) {
-                        val movie = response.body()?.data
-                        cvMovie.setOnClickListener{
-                            val intent = Intent(holder.itemView.context, MovieInfo::class.java)
-                            holder.itemView.context.startActivity(intent)
-                        }
-                    } else {
-                        Log.d("ddd", "Response not successful")
-                    }
-                }
-                override fun onFailure(call: Call<com.example.dominictoretto.data.MovieInfo>, t: Throwable) {
-                    TODO("Not yet implemented")
-                }
-            })
         }
     }
 

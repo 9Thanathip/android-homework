@@ -11,20 +11,5 @@ class Api {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    private val movieApi = retrofit.create(Interface::class.java)
-
-    fun getMovieData(callback: Callback<Movie>) {
-        val call = movieApi.getMovie()
-        call.enqueue(callback)
-    }
-
-    fun getMovieInfo(callback: Callback<MovieInfo>) {
-        val call = movieApi.getData()
-        call.enqueue(callback)
-    }
-
-    fun getDataInfo(callback: Callback<MovieInfo>) {
-        val call = movieApi.getDataInfo()
-        call.enqueue(callback)
-    }
+    val apiService = retrofit.create(Interface::class.java)
 }

@@ -6,11 +6,10 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dominictoretto.databinding.LoginPageBinding
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     private lateinit var binding: LoginPageBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,8 +20,6 @@ class MainActivity : AppCompatActivity() {
         val PREF_NAME = "dataSave"
         var inputText: String = ""
         val sharedPref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        val savedText = sharedPref.getString("key", "")
-//        Toast.makeText(this, "ค่าที่รับได้คือ $savedText", Toast.LENGTH_SHORT).show()
 
         setContentView(view)
         binding.inputName.addTextChangedListener(object : TextWatcher {
