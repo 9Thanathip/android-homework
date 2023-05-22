@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <TextView
+            android:id="@+id/movie_title"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/black"
+            android:fontFamily="@font/thai_font"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="name movie" />
+
+        <ImageView
+            android:id="@+id/movie_image"
+            android:layout_width="156dp"
+            android:layout_height="231dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="76dp"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/type_movie_2"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_botton"
+            android:fontFamily="@font/thai_font"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/title_main_2"
+            app:layout_constraintTop_toBottomOf="@+id/title_main_2"
+            tools:text="action" />
+
+        <TextView
+            android:id="@+id/title_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/thai_font"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@+id/movie_image"
+            app:layout_constraintTop_toTopOf="@+id/movie_image"
+            tools:text="movie name" />
+
+        <ImageView
+            android:id="@+id/back_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/movie_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/baseline_arrow_back_white" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/play_botton"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:background="@drawable/bg_botton"
+            app:layout_constraintBottom_toBottomOf="@+id/movie_image"
+            app:layout_constraintStart_toEndOf="@+id/movie_image">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="18dp"
+                android:src="@drawable/baseline_play"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="2dp"
+                android:paddingRight="26dp"
+                android:text="PLAY"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/movie_image_2"
+            android:layout_width="156dp"
+            android:layout_height="231dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movie_image" />
+
+        <TextView
+            android:id="@+id/title_main_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/thai_font"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:layout_marginLeft="40dp"
+            app:layout_constraintStart_toEndOf="@+id/movie_image_2"
+            app:layout_constraintTop_toTopOf="@+id/movie_image_2"
+            tools:text="movie name" />
+
+        <TextView
+            android:id="@+id/type_movie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_botton"
+            android:fontFamily="@font/thai_font"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/title_main"
+            app:layout_constraintTop_toBottomOf="@+id/title_main"
+            tools:text="action" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/play_botton_2"
+            android:layout_width="120dp"
+            android:layout_marginLeft="40dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_botton"
+            app:layout_constraintBottom_toBottomOf="@+id/movie_image_2"
+            app:layout_constraintStart_toEndOf="@+id/movie_image_2">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="18dp"
+                android:src="@drawable/baseline_play"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/textView_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="2dp"
+                android:paddingRight="26dp"
+                android:text="PLAY"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
