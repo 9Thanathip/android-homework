@@ -11,6 +11,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext
+import org.koin.core.context.startKoin
 
 class LogoActivity : AppCompatActivity() {
     private lateinit var binding: LogoBinding
@@ -21,7 +22,7 @@ class LogoActivity : AppCompatActivity() {
         val PREF_NAME = "dataSave"
         val sharedPref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         val savedText = sharedPref.getString("key", "")
-        GlobalContext.startKoin {
+        startKoin {
             androidContext(this@LogoActivity)
             modules(appModule)
         }

@@ -7,14 +7,15 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.dominictoretto.data.loadImage
 import com.example.dominictoretto.data.LoadMovieData
 import com.example.dominictoretto.databinding.MovieInfoBinding
+import com.example.dominictoretto.viewModel.MovieInfoViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieInfo : AppCompatActivity() {
     private lateinit var binding:MovieInfoBinding
-    private val loadMovieData : LoadMovieData by inject()
+    private val movieInfoViewModel: MovieInfoViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,11 +25,12 @@ class MovieInfo : AppCompatActivity() {
             backBottom.setOnClickListener {
                 onBackPressed()
             }
+
             CoroutineScope(Dispatchers.Main).launch {
                 try {
-                    loadMovieData.loadData()
-                    val movie = loadMovieData.movie
-                    val dataInfo = loadMovieData.dataInfo
+                    movieInfoViewModel.loadData()
+                    val movie = movieInfoViewModel.getMovie()
+                    val dataInfo = movieInfoViewModel.getData()
 
                     binding.apply {
                         movie?.apply {

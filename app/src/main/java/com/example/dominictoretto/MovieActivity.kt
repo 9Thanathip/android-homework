@@ -8,9 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dominictoretto.data.loadImage
 import com.example.dominictoretto.data.LoadMovieData
+import com.example.dominictoretto.data.loadImage
 import com.example.dominictoretto.databinding.MoviePageHolderBinding
+import com.example.dominictoretto.viewModel.MovieInfoViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,7 +20,7 @@ import org.koin.android.ext.android.inject
 class MovieActivity : AppCompatActivity() {
     private lateinit var binding: MoviePageHolderBinding
     private lateinit var movieHolder: MovieHolder
-    private val loadMovieData:LoadMovieData by inject()
+    private val movieInfoViewModel: MovieInfoViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,8 +60,8 @@ class MovieActivity : AppCompatActivity() {
     private fun loadData() {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                loadMovieData.loadData()
-                val dataMovie = loadMovieData.dataMovie
+                movieInfoViewModel.loadData()
+                val dataMovie = movieInfoViewModel.getInfo()
                 binding.apply {
                     dataMovie?.apply {
                         movieName.text = data.title

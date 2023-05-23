@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_botton"
             android:fontFamily="@font/thai_font"
-            android:padding="10dp"
+            android:paddingHorizontal="10dp"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="@+id/title_main_2"
             app:layout_constraintTop_toBottomOf="@+id/title_main_2"
@@ -75,7 +75,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/play_botton"
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:background="@drawable/bg_botton"
@@ -85,7 +85,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="18dp"
+                android:paddingLeft="10dp"
                 android:src="@drawable/baseline_play"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -96,10 +96,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingVertical="2dp"
-                android:paddingRight="26dp"
+                android:paddingRight="18dp"
                 android:text="PLAY"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -135,7 +135,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_botton"
             android:fontFamily="@font/thai_font"
-            android:padding="10dp"
+            android:paddingHorizontal="10dp"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="@+id/title_main"
             app:layout_constraintTop_toBottomOf="@+id/title_main"
@@ -143,7 +143,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/play_botton_2"
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_marginLeft="40dp"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_botton"
@@ -153,7 +153,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="18dp"
+                android:paddingLeft="10dp"
                 android:src="@drawable/baseline_play"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -165,10 +165,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingVertical="2dp"
-                android:paddingRight="26dp"
+                android:paddingRight="18dp"
                 android:text="PLAY"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -177,6 +177,7 @@
 
         <ProgressBar
             android:id="@+id/progress_action"
+            tools:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/black"
