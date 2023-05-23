@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dominictoretto.data.content
-import com.example.dominictoretto.databinding.ItemMovieBinding
 import com.example.dominictoretto.databinding.MovieViewHolderBinding
 
 class MovieHolder :
@@ -35,12 +34,11 @@ class MovieHolder :
                 layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 adapter = movieAdapter
             }
-            movieAdapter.setList(item.infos ?: emptyList())
+            movieAdapter.setList(item.infos)
             movieAdapter.notifyDataSetChanged()
 
         }
     }
-
 
     override fun getItemCount(): Int {
         return list.size
