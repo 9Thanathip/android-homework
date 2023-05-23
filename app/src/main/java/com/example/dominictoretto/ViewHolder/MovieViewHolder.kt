@@ -1,14 +1,15 @@
-package com.example.dominictoretto
+package com.example.dominictoretto.ViewHolder
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dominictoretto.Adapter.MovieAdapter
 import com.example.dominictoretto.data.content
 import com.example.dominictoretto.databinding.MovieViewHolderBinding
 
-class MovieHolder :
-    RecyclerView.Adapter<MovieHolder.MovieViewHolder>() {
+class MovieViewHolder :
+    RecyclerView.Adapter<MovieViewHolder.MovieViewHolder>() {
 
     private var list: List<content> = listOf()
 

@@ -1,17 +1,13 @@
-package com.example.dominictoretto
+package com.example.dominictoretto.Activity
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.dominictoretto.data.appModule
 import com.example.dominictoretto.databinding.LogoBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.GlobalContext
-import org.koin.core.context.startKoin
 
 class LogoActivity : AppCompatActivity() {
     private lateinit var binding: LogoBinding

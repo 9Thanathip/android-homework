@@ -1,11 +1,10 @@
-package com.example.dominictoretto
+package com.example.dominictoretto.Activity
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dominictoretto.data.loadImage
-import com.example.dominictoretto.data.LoadMovieData
 import com.example.dominictoretto.databinding.MovieInfoBinding
 import com.example.dominictoretto.viewModel.MovieInfoViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -13,8 +12,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MovieInfo : AppCompatActivity() {
-    private lateinit var binding:MovieInfoBinding
+class MovieInfoActivity : AppCompatActivity() {
+    private lateinit var binding: MovieInfoBinding
     private val movieInfoViewModel: MovieInfoViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {

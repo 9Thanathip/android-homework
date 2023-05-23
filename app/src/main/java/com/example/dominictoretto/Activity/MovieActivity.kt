@@ -1,4 +1,4 @@
-package com.example.dominictoretto
+package com.example.dominictoretto.Activity
 
 import android.content.Intent
 import android.net.Uri
@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dominictoretto.data.LoadMovieData
+import com.example.dominictoretto.ViewHolder.MovieViewHolder
 import com.example.dominictoretto.data.loadImage
 import com.example.dominictoretto.databinding.MoviePageHolderBinding
 import com.example.dominictoretto.viewModel.MovieInfoViewModel
@@ -19,7 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieActivity : AppCompatActivity() {
     private lateinit var binding: MoviePageHolderBinding
-    private lateinit var movieHolder: MovieHolder
+    private lateinit var movieViewHolder: MovieViewHolder
     private val movieInfoViewModel: MovieInfoViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +39,7 @@ class MovieActivity : AppCompatActivity() {
             }
 
             imageView.setOnClickListener {
-                val intent = Intent(this@MovieActivity, MovieInfo::class.java)
+                val intent = Intent(this@MovieActivity, MovieInfoActivity::class.java)
                 startActivity(intent)
             }
 
@@ -66,17 +66,17 @@ class MovieActivity : AppCompatActivity() {
                     dataMovie?.apply {
                         movieName.text = data.title
                         imageView.loadImage(data.image)
-                        movieHolder = MovieHolder()
+                        movieViewHolder = MovieViewHolder()
                         movieRecyclerView.apply {
                             layoutManager =
                                 LinearLayoutManager(
                                     this@MovieActivity, RecyclerView.VERTICAL,
                                     false
                                 )
-                            adapter = movieHolder
+                            adapter = movieViewHolder
                         }
-                        movieHolder.setList(data.content ?: emptyList())
-                        movieHolder.notifyDataSetChanged()
+                        movieViewHolder.setList(data.content ?: emptyList())
+                        movieViewHolder.notifyDataSetChanged()
                     }
                 }
             } catch (e: Exception) {

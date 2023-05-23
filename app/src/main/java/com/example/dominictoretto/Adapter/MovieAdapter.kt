@@ -1,20 +1,12 @@
-package com.example.dominictoretto
+package com.example.dominictoretto.Adapter
 
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dominictoretto.data.Api
-import com.example.dominictoretto.data.content
 import com.example.dominictoretto.data.infos
 import com.example.dominictoretto.data.loadImage
 import com.example.dominictoretto.databinding.ItemMovieBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MovieAdapter() :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {

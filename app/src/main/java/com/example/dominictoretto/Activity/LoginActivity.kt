@@ -1,4 +1,4 @@
-package com.example.dominictoretto
+package com.example.dominictoretto.Activity
 
 import android.content.Context
 import android.content.Intent
