@@ -20,8 +20,8 @@ class LoginActivity : AppCompatActivity() {
         val PREF_NAME = "dataSave"
         var inputText = ""
         val sharedPref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-
         setContentView(view)
+
         binding.inputName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}

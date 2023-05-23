@@ -35,9 +35,8 @@ class MovieViewHolder :
                 layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 adapter = movieAdapter
             }
-            movieAdapter.setList(item.infos)
+            item.infos?.let { movieAdapter.setList(it) }
             movieAdapter.notifyDataSetChanged()
-
         }
     }
 

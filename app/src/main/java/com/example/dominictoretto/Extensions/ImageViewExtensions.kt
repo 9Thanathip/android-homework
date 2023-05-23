@@ -1,4 +1,4 @@
-package com.example.dominictoretto.data
+package com.example.dominictoretto.Extensions
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide

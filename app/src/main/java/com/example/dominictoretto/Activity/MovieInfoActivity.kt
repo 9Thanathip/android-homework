@@ -2,9 +2,9 @@ package com.example.dominictoretto.Activity
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.dominictoretto.data.loadImage
+import androidx.core.view.isVisible
+import com.example.dominictoretto.Extensions.loadImage
 import com.example.dominictoretto.databinding.MovieInfoBinding
 import com.example.dominictoretto.viewModel.MovieInfoViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -20,38 +20,44 @@ class MovieInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = MovieInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        observeData()
+        loadData()
         binding.apply {
             backBottom.setOnClickListener {
                 onBackPressed()
             }
+        }
+    }
 
-            CoroutineScope(Dispatchers.Main).launch {
-                try {
-                    movieInfoViewModel.loadData()
-                    val movie = movieInfoViewModel.getMovie()
-                    val dataInfo = movieInfoViewModel.getData()
+    private fun observeData() {
 
-                    binding.apply {
-                        movie?.apply {
-                            movieImage.loadImage(data.image)
-                            movieTitle.text = data.title
-                            titleMain.text = data.title
-                            typeMovie.text = data.type
-                        }
-                        dataInfo?.apply {
-                            movieImage2.loadImage(data.image)
-                            titleMain2.text = data.title
-                            typeMovie2.text = data.type
-                        }
-                    }
-
-                } catch (e: Exception) {
-                    Log.d("ddd", e.toString())
-                } finally {
-                    progressAction.visibility = View.GONE
-                }
+        movieInfoViewModel.movie.observe(this@MovieInfoActivity) { movie ->
+            binding.apply {
+                movieImage.loadImage(movie.data?.image)
+                titleMain.text = movie.data?.title
+                typeMovie.text = movie.data?.type
+                movieTitle.text = movie.data?.title
             }
+        }
 
+        movieInfoViewModel.data.observe(this@MovieInfoActivity) { dataInfo ->
+            binding.apply {
+                movieImage2.loadImage(dataInfo.data?.image)
+                titleMain2.text = dataInfo.data?.title
+                typeMovie2.text = dataInfo.data?.type
+            }
+        }
+    }
+
+    private fun loadData() {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                movieInfoViewModel.loadData()
+            } catch (e: Exception) {
+                Log.d("ddd", e.toString())
+            } finally {
+                binding.progressAction.isVisible = false
+            }
         }
     }
 }

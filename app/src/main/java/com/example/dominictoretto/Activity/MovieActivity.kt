@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dominictoretto.Extensions.loadImage
 import com.example.dominictoretto.ViewHolder.MovieViewHolder
-import com.example.dominictoretto.data.loadImage
 import com.example.dominictoretto.databinding.MoviePageHolderBinding
 import com.example.dominictoretto.viewModel.MovieInfoViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -28,6 +28,7 @@ class MovieActivity : AppCompatActivity() {
         setContentView(binding.root)
         loadData()
         setupViews()
+        observeData()
     }
 
     private fun setupViews() {
@@ -57,28 +58,63 @@ class MovieActivity : AppCompatActivity() {
         }
     }
 
+//    private fun loadData() {
+//        CoroutineScope(Dispatchers.Main).launch {
+//            try {
+//                movieInfoViewModel.loadData()
+//                val dataMovie = movieInfoViewModel.getInfo()
+//                binding.apply {
+//                    dataMovie?.apply {
+//                        movieName.text = data.title
+//                        imageView.loadImage(data.image)
+//                        movieViewHolder = MovieViewHolder()
+//                        movieRecyclerView.apply {
+//                            layoutManager =
+//                                LinearLayoutManager(
+//                                    this@MovieActivity, RecyclerView.VERTICAL,
+//                                    false
+//                                )
+//                            adapter = movieViewHolder
+//                        }
+//                        movieViewHolder.setList(data.content ?: emptyList())
+//                        movieViewHolder.notifyDataSetChanged()
+//                    }
+//                }
+//            } catch (e: Exception) {
+//                Log.d("ddd", e.toString())
+//            } finally {
+//                binding.progressAction.isVisible = false
+//                binding.scrollView.isVisible = true
+//            }
+//        }
+//    }
+
+    private fun observeData() {
+        movieInfoViewModel.info.observe(this@MovieActivity) { dataMovie ->
+            binding.apply {
+                dataMovie.apply {
+                    movieName.text = data?.title
+                    imageView.loadImage(data?.image)
+                    movieViewHolder = MovieViewHolder()
+                    movieRecyclerView.apply {
+                        layoutManager =
+                            LinearLayoutManager(
+                                this@MovieActivity, RecyclerView.VERTICAL,
+                                false
+                            )
+                        adapter = movieViewHolder
+                    }
+                    movieViewHolder.setList(data?.content ?: emptyList())
+                    movieViewHolder.notifyDataSetChanged()
+                }
+            }
+        }
+    }
+
     private fun loadData() {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 movieInfoViewModel.loadData()
-                val dataMovie = movieInfoViewModel.getInfo()
-                binding.apply {
-                    dataMovie?.apply {
-                        movieName.text = data.title
-                        imageView.loadImage(data.image)
-                        movieViewHolder = MovieViewHolder()
-                        movieRecyclerView.apply {
-                            layoutManager =
-                                LinearLayoutManager(
-                                    this@MovieActivity, RecyclerView.VERTICAL,
-                                    false
-                                )
-                            adapter = movieViewHolder
-                        }
-                        movieViewHolder.setList(data.content ?: emptyList())
-                        movieViewHolder.notifyDataSetChanged()
-                    }
-                }
             } catch (e: Exception) {
                 Log.d("ddd", e.toString())
             } finally {

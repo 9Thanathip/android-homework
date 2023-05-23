@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dominictoretto.Extensions.loadImage
 import com.example.dominictoretto.data.infos
-import com.example.dominictoretto.data.loadImage
 import com.example.dominictoretto.databinding.ItemMovieBinding
 
 class MovieAdapter() :
