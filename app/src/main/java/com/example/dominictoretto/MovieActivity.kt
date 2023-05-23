@@ -15,12 +15,12 @@ import com.example.dominictoretto.viewModel.MovieInfoViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieActivity : AppCompatActivity() {
     private lateinit var binding: MoviePageHolderBinding
     private lateinit var movieHolder: MovieHolder
-    private val movieInfoViewModel: MovieInfoViewModel by inject()
+    private val movieInfoViewModel: MovieInfoViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

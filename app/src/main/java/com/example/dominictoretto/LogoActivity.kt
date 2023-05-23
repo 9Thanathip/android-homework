@@ -22,10 +22,6 @@ class LogoActivity : AppCompatActivity() {
         val PREF_NAME = "dataSave"
         val sharedPref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         val savedText = sharedPref.getString("key", "")
-        startKoin {
-            androidContext(this@LogoActivity)
-            modules(appModule)
-        }
 
         GlobalScope.launch {
             delay(3000)
