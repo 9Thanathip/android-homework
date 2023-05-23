@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import com.example.dominictoretto.Extensions.loadImage
 import com.example.dominictoretto.databinding.MovieInfoBinding
 import com.example.dominictoretto.viewModel.MovieInfoViewModel
@@ -31,26 +32,30 @@ class MovieInfoActivity : AppCompatActivity() {
 
     private fun observeData() {
 
-        movieInfoViewModel.movie.observe(this@MovieInfoActivity) { movie ->
-            binding.apply {
-                movieImage.loadImage(movie.data?.image)
-                titleMain.text = movie.data?.title
-                typeMovie.text = movie.data?.type
-                movieTitle.text = movie.data?.title
+        lifecycleScope.launch {
+            movieInfoViewModel.movie.collect { movie ->
+                binding.apply {
+                    movieImage.loadImage(movie.data?.image)
+                    titleMain.text = movie.data?.title
+                    typeMovie.text = movie.data?.type
+                    movieTitle.text = movie.data?.title
+                }
             }
         }
 
-        movieInfoViewModel.data.observe(this@MovieInfoActivity) { dataInfo ->
-            binding.apply {
-                movieImage2.loadImage(dataInfo.data?.image)
-                titleMain2.text = dataInfo.data?.title
-                typeMovie2.text = dataInfo.data?.type
+        lifecycleScope.launch {
+            movieInfoViewModel.data.collect { dataInfo ->
+                binding.apply {
+                    movieImage2.loadImage(dataInfo.data?.image)
+                    titleMain2.text = dataInfo.data?.title
+                    typeMovie2.text = dataInfo.data?.type
+                }
             }
         }
     }
 
     private fun loadData() {
-        CoroutineScope(Dispatchers.Main).launch {
+        lifecycleScope.launch {
             try {
                 movieInfoViewModel.loadData()
             } catch (e: Exception) {
