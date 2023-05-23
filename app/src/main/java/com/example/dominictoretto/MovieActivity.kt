@@ -8,17 +8,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dominictoretto.data.Api
 import com.example.dominictoretto.data.loadImage
+import com.example.dominictoretto.data.LoadMovieData
 import com.example.dominictoretto.databinding.MoviePageHolderBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import org.koin.android.ext.android.inject
 
 class MovieActivity : AppCompatActivity() {
     private lateinit var binding: MoviePageHolderBinding
     private lateinit var movieHolder: MovieHolder
+    private val loadMovieData:LoadMovieData by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,50 +30,53 @@ class MovieActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-        binding.playBotton.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse("https://www.bugaboo.tv/lakorn/plerngprai")
-            startActivity(intent)
-        }
-
-        binding.imageView.setOnClickListener {
-            val intent = Intent(this@MovieActivity, MovieInfo::class.java)
-            startActivity(intent)
-        }
-
-        binding.buttonLogout.setOnClickListener {
-            val sharedPref = getSharedPreferences("dataSave", MODE_PRIVATE)
-            with(sharedPref.edit()) {
-                putString("key", "")
-                apply()
+        binding.apply {
+            playBotton.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse("https://www.bugaboo.tv/lakorn/plerngprai")
+                startActivity(intent)
             }
 
-            val intent = Intent(this@MovieActivity, LoginActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+            imageView.setOnClickListener {
+                val intent = Intent(this@MovieActivity, MovieInfo::class.java)
+                startActivity(intent)
+            }
+
+            buttonLogout.setOnClickListener {
+                val sharedPref = getSharedPreferences("dataSave", MODE_PRIVATE)
+                with(sharedPref.edit()) {
+                    putString("key", "")
+                    apply()
+                }
+
+                val intent = Intent(this@MovieActivity, LoginActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
         }
     }
 
     private fun loadData() {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val dataMovie = withContext(Dispatchers.IO) {
-                    Api().apiService.getMovie2()
-                }
+                loadMovieData.loadData()
+                val dataMovie = loadMovieData.dataMovie
                 binding.apply {
-                    movieName.text = dataMovie.data.title
-                    imageView.loadImage(dataMovie.data.image)
-                    movieHolder = MovieHolder()
-                    movieRecyclerView.apply {
-                        layoutManager =
-                            LinearLayoutManager(
-                                this@MovieActivity, RecyclerView.VERTICAL,
-                                false
-                            )
-                        adapter = movieHolder
+                    dataMovie?.apply {
+                        movieName.text = data.title
+                        imageView.loadImage(data.image)
+                        movieHolder = MovieHolder()
+                        movieRecyclerView.apply {
+                            layoutManager =
+                                LinearLayoutManager(
+                                    this@MovieActivity, RecyclerView.VERTICAL,
+                                    false
+                                )
+                            adapter = movieHolder
+                        }
+                        movieHolder.setList(data.content ?: emptyList())
+                        movieHolder.notifyDataSetChanged()
                     }
-                    movieHolder.setList(dataMovie.data.content ?: emptyList())
-                    movieHolder.notifyDataSetChanged()
                 }
             } catch (e: Exception) {
                 Log.d("ddd", e.toString())

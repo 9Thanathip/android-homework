@@ -1,22 +1,24 @@
 package com.example.dominictoretto.data
 
 import android.util.Log
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-fun loadData() {
-    CoroutineScope(Dispatchers.Main).launch {
+class LoadMovieData(private val api: Api) {
+    var movie: MovieInfo? = null
+    var dataMovie: Movie? = null
+    var dataInfo: MovieInfo? = null
+
+    suspend fun loadData() {
         try {
-            val movie = withContext(Dispatchers.IO) {
-                Api().apiService.getData2()
+            movie = withContext(Dispatchers.IO) {
+                api.apiService.getData2()
             }
-            val dataMovie = withContext(Dispatchers.IO) {
-                Api().apiService.getMovie2()
+            dataMovie = withContext(Dispatchers.IO) {
+                api.apiService.getMovie2()
             }
-            val dataInfo = withContext(Dispatchers.IO){
-                Api().apiService.getDataInfo2()
+            dataInfo = withContext(Dispatchers.IO) {
+                api.apiService.getDataInfo2()
             }
         } catch (e: Exception) {
             Log.d("ddd", e.toString())
