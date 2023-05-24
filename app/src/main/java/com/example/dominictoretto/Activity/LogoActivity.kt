@@ -11,11 +11,13 @@ import kotlinx.coroutines.launch
 
 class LogoActivity : AppCompatActivity() {
     private lateinit var binding: LogoBinding
+    companion object{
+        const val PREF_NAME = "dataSave"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = LogoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val PREF_NAME = "dataSave"
         val sharedPref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         val savedText = sharedPref.getString("key", "")
 
@@ -23,9 +25,11 @@ class LogoActivity : AppCompatActivity() {
             delay(3000)
             if (savedText.isNullOrEmpty()) {
                 val intent = Intent(this@LogoActivity, LoginActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             } else {
                 val intent = Intent(this@LogoActivity, MovieActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
         }

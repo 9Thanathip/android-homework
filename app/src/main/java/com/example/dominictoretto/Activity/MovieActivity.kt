@@ -21,7 +21,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MovieActivity : AppCompatActivity() {
     private lateinit var binding: MoviePageHolderBinding
     private lateinit var movieViewHolder: MovieViewHolder
-    private var list: List<Movie> = listOf()
     private val movieActivityViewModel: MovieActivityViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +29,6 @@ class MovieActivity : AppCompatActivity() {
         setContentView(binding.root)
         loadData()
         setupViews()
-        Log.d("ddd","list - "+list)
     }
 
     private fun setupViews() {
