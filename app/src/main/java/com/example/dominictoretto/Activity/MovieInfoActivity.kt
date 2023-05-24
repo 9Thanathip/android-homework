@@ -8,8 +8,6 @@ import androidx.lifecycle.lifecycleScope
 import com.example.dominictoretto.Extensions.loadImage
 import com.example.dominictoretto.databinding.MovieInfoBinding
 import com.example.dominictoretto.viewModel.MovieInfoViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,9 +29,8 @@ class MovieInfoActivity : AppCompatActivity() {
     }
 
     private fun observeData() {
-
         lifecycleScope.launch {
-            movieInfoViewModel.movie.collect { movie ->
+            movieInfoViewModel.data.collect { movie ->
                 binding.apply {
                     movieImage.loadImage(movie.data?.image)
                     titleMain.text = movie.data?.title
@@ -44,7 +41,7 @@ class MovieInfoActivity : AppCompatActivity() {
         }
 
         lifecycleScope.launch {
-            movieInfoViewModel.data.collect { dataInfo ->
+            movieInfoViewModel.info.collect { dataInfo ->
                 binding.apply {
                     movieImage2.loadImage(dataInfo.data?.image)
                     titleMain2.text = dataInfo.data?.title

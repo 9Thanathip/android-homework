@@ -14,7 +14,7 @@ data class data(
     val title: String = "",
     val image: String = "",
     val content: List<content>? = null,
-    val type: String
+    val type: String = ""
 )
 
 data class content(

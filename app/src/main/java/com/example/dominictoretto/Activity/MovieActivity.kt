@@ -1,5 +1,6 @@
 package com.example.dominictoretto.Activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -11,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dominictoretto.Extensions.loadImage
 import com.example.dominictoretto.ViewHolder.MovieViewHolder
+import com.example.dominictoretto.data.Movie
 import com.example.dominictoretto.databinding.MoviePageHolderBinding
+import com.example.dominictoretto.viewModel.MovieActivityViewModel
 import com.example.dominictoretto.viewModel.MovieInfoViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -19,7 +22,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MovieActivity : AppCompatActivity() {
     private lateinit var binding: MoviePageHolderBinding
     private lateinit var movieViewHolder: MovieViewHolder
-    private val movieInfoViewModel: MovieInfoViewModel by viewModel()
+    private var list: List<Movie> = listOf()
+    private val movieActivityViewModel: MovieActivityViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +32,7 @@ class MovieActivity : AppCompatActivity() {
         loadData()
         setupViews()
         observeData()
+        Log.d("ddd","list - "+list)
     }
 
     private fun setupViews() {
@@ -56,9 +61,10 @@ class MovieActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun observeData() {
         lifecycleScope.launch {
-            movieInfoViewModel.info.collect { dataMovie ->
+            movieActivityViewModel.info.collect { dataMovie ->
                 binding.apply {
                     dataMovie.apply {
                         movieName.text = dataMovie.data?.title
@@ -83,7 +89,7 @@ class MovieActivity : AppCompatActivity() {
     private fun loadData() {
         lifecycleScope.launch {
             try {
-                movieInfoViewModel.loadData()
+                movieActivityViewModel.loadData()
             } catch (e: Exception) {
                 Log.d("ddd", e.toString())
             } finally {

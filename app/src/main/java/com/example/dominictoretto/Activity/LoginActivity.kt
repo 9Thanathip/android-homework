@@ -12,12 +12,14 @@ import com.example.dominictoretto.databinding.LoginPageBinding
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: LoginPageBinding
 
+    companion object {
+        private const val PREF_NAME = "dataSave"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = LoginPageBinding.inflate(layoutInflater)
         val view = binding.root
-        val PREF_NAME = "dataSave"
         var inputText = ""
         val sharedPref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         setContentView(view)
