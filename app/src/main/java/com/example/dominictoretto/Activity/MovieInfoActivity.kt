@@ -19,8 +19,8 @@ class MovieInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = MovieInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        observeData()
         loadData()
+        observeData()
         binding.apply {
             backBottom.setOnClickListener {
                 onBackPressed()
@@ -49,6 +49,11 @@ class MovieInfoActivity : AppCompatActivity() {
                 }
             }
         }
+        lifecycleScope.launch {
+            movieInfoViewModel.loading.collect { isLoading ->
+                binding.progressAction.isVisible = isLoading
+            }
+        }
     }
 
     private fun loadData() {
@@ -57,8 +62,6 @@ class MovieInfoActivity : AppCompatActivity() {
                 movieInfoViewModel.loadData()
             } catch (e: Exception) {
                 Log.d("ddd", e.toString())
-            } finally {
-                binding.progressAction.isVisible = false
             }
         }
     }

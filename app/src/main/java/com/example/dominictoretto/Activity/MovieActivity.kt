@@ -15,7 +15,6 @@ import com.example.dominictoretto.ViewHolder.MovieViewHolder
 import com.example.dominictoretto.data.Movie
 import com.example.dominictoretto.databinding.MoviePageHolderBinding
 import com.example.dominictoretto.viewModel.MovieActivityViewModel
-import com.example.dominictoretto.viewModel.MovieInfoViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,7 +30,6 @@ class MovieActivity : AppCompatActivity() {
         setContentView(binding.root)
         loadData()
         setupViews()
-        observeData()
         Log.d("ddd","list - "+list)
     }
 
@@ -90,10 +88,10 @@ class MovieActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 movieActivityViewModel.loadData()
+                observeData()
             } catch (e: Exception) {
                 Log.d("ddd", e.toString())
             } finally {
-                binding.progressAction.isVisible = false
                 binding.scrollView.isVisible = true
             }
         }
