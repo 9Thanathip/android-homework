@@ -12,8 +12,8 @@ import kotlinx.coroutines.launch
 class MovieActivityViewModel(private val movieActivityLoadData: MovieActivityLoadData) :
     ViewModel() {
 
-    private val _dataMovie = MutableStateFlow(Movie())
-    val info: StateFlow<Movie> = _dataMovie
+    private val _dataMovie = MutableStateFlow<Movie?>(null)
+    val info: StateFlow<Movie?> = _dataMovie
 
     private val _loading = MutableStateFlow(false)
     val loading: StateFlow<Boolean> = _loading

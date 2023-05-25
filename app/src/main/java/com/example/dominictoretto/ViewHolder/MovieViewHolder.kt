@@ -1,6 +1,5 @@
 package com.example.dominictoretto.ViewHolder
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,10 +43,8 @@ class MovieViewHolder :
         return list.size
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     fun setList(list: List<Content>) {
         this.list = list
-        notifyDataSetChanged()
     }
     inner class MovieViewHolder(
         val binding: MovieViewHolderBinding,

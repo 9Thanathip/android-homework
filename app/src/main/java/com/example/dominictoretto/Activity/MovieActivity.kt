@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dominictoretto.Extensions.loadImage
 import com.example.dominictoretto.ViewHolder.MovieViewHolder
-import com.example.dominictoretto.data.Movie
 import com.example.dominictoretto.databinding.MoviePageHolderBinding
 import com.example.dominictoretto.viewModel.MovieActivityViewModel
 import kotlinx.coroutines.launch
@@ -25,22 +23,23 @@ class MovieActivity : AppCompatActivity() {
     private lateinit var movieViewHolder: MovieViewHolder
     private val movieActivityViewModel: MovieActivityViewModel by viewModel()
     private var backPressedOnce = false
+    private var backPressedTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MoviePageHolderBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        loadData()
         setupViews()
+        loadData()
     }
 
     override fun onBackPressed() {
-        if(backPressedOnce){
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - backPressedTime < 2000) {
             super.onBackPressed()
         } else {
-            backPressedOnce = true
-            Toast.makeText(this,"กดอีกครั้งเพื่อออก",Toast.LENGTH_SHORT).show()
-            Handler().postDelayed({ backPressedOnce = false }, 2000)
+            backPressedTime = currentTime
+            Toast.makeText(this, "กดอีกครั้งเพื่อออก", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -67,6 +66,14 @@ class MovieActivity : AppCompatActivity() {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
+
+            movieViewHolder = MovieViewHolder()
+            movieRecyclerView.apply {
+                layoutManager = LinearLayoutManager(
+                    this@MovieActivity, RecyclerView.VERTICAL, false
+                )
+                adapter = movieViewHolder
+            }
         }
     }
 
@@ -75,26 +82,15 @@ class MovieActivity : AppCompatActivity() {
         lifecycleScope.launch {
             movieActivityViewModel.info.collect { dataMovie ->
                 binding.apply {
-                    dataMovie.apply {
-                        movieName.text = dataMovie.data?.title
-                        imageView.loadImage(dataMovie.data?.image)
-                        movieViewHolder = MovieViewHolder()
-                        movieRecyclerView.apply {
-                            layoutManager =
-                                LinearLayoutManager(
-                                    this@MovieActivity, RecyclerView.VERTICAL,
-                                    false
-                                )
-                            adapter = movieViewHolder
-                        }
-                        movieViewHolder.setList(dataMovie.data?.content ?: emptyList())
-                        movieViewHolder.notifyDataSetChanged()
-                    }
+                    movieName.text = dataMovie?.data?.title
+                    imageView.loadImage(dataMovie?.data?.image)
+                    movieViewHolder.setList(dataMovie?.data?.content ?: emptyList())
+                    movieViewHolder.notifyDataSetChanged()
                 }
             }
         }
         lifecycleScope.launch {
-            movieActivityViewModel.loading.collect{ isLoading ->
+            movieActivityViewModel.loading.collect { isLoading ->
                 binding.progressAction.isVisible = isLoading
             }
         }

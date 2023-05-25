@@ -5,12 +5,15 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dominictoretto.databinding.LogoBinding
+import com.example.dominictoretto.viewModel.LogoViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LogoActivity : AppCompatActivity() {
     private lateinit var binding: LogoBinding
+    private val logoViewModel: LogoViewModel by viewModel()
     companion object{
         const val PREF_NAME = "dataSave"
     }

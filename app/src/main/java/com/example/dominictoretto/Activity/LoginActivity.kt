@@ -2,7 +2,6 @@ package com.example.dominictoretto.Activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
@@ -14,8 +13,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: LoginPageBinding
-    private var backPressedOnce = false
     private val loginViewModel: LoginViewModel by viewModel()
+    private var backPressedOnce = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,14 +40,18 @@ class LoginActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
-    }
-    override fun onBackPressed() {
-        if(backPressedOnce){
-            super.onBackPressed()
-        } else {
-            backPressedOnce = true
-            Toast.makeText(this,"กดอีกครั้งเพื่อออก", Toast.LENGTH_SHORT).show()
-            Handler().postDelayed({ backPressedOnce = false }, 2000)
+
+        loginViewModel.exitApp.observe(this) { shouldExit ->
+            if (shouldExit) {
+                super.onBackPressed()
+            } else {
+                Toast.makeText(this, "กดอีกครั้งเพื่อออก", Toast.LENGTH_SHORT).show()
+                loginViewModel.onBackPressed()
+            }
         }
+    }
+
+    override fun onBackPressed() {
+        loginViewModel.onBackPressed()
     }
 }
