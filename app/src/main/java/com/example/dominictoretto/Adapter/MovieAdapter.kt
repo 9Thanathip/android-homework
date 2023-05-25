@@ -29,7 +29,7 @@ class MovieAdapter() :
         val item = list[position]
         holder.binding.apply {
             movieImage.loadImage(item.image)
-            movieEpisode.isVisible = item.is_episode
+            movieEpisode.isVisible = item.isEpisode
             movieTitle.isVisible = !item.name.isNullOrBlank()
             movieTitle.text = item.name
         }

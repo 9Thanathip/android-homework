@@ -2,7 +2,7 @@ package com.example.dominictoretto.data
 
 import retrofit2.http.GET
 
-interface Interface {
+interface MovieService {
     @GET("/v3/eb3b3684-3875-4af3-8b8f-c5d97b2840ce")
     suspend fun getMovie2(): Movie
 

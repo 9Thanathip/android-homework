@@ -1,5 +1,7 @@
 package com.example.dominictoretto.data
 
+import com.google.gson.annotations.SerializedName
+
 data class Movie(
     val status: String = "",
     val data: Data? = null,
@@ -24,7 +26,8 @@ data class Content(
 
 data class Info(
     val name: String = "",
-    val is_episode: Boolean = false,
+    @SerializedName("is_episode")
+    val isEpisode: Boolean = false,
     val image: String = "",
 )
 
