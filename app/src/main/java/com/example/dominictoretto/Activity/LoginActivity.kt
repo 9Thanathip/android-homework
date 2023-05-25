@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.example.dominictoretto.R
 import com.example.dominictoretto.databinding.LoginPageBinding
 import com.example.dominictoretto.viewModel.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -45,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
             if (shouldExit) {
                 super.onBackPressed()
             } else {
-                Toast.makeText(this, "กดอีกครั้งเพื่อออก", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.close_app, Toast.LENGTH_SHORT).show()
                 loginViewModel.onBackPressed()
             }
         }

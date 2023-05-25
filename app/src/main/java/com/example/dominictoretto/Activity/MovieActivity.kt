@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dominictoretto.Extensions.loadImage
+import com.example.dominictoretto.R
 import com.example.dominictoretto.ViewHolder.MovieViewHolder
 import com.example.dominictoretto.databinding.MoviePageHolderBinding
 import com.example.dominictoretto.viewModel.MovieActivityViewModel
@@ -22,7 +23,6 @@ class MovieActivity : AppCompatActivity() {
     private lateinit var binding: MoviePageHolderBinding
     private lateinit var movieViewHolder: MovieViewHolder
     private val movieActivityViewModel: MovieActivityViewModel by viewModel()
-    private var backPressedOnce = false
     private var backPressedTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +39,7 @@ class MovieActivity : AppCompatActivity() {
             super.onBackPressed()
         } else {
             backPressedTime = currentTime
-            Toast.makeText(this, "กดอีกครั้งเพื่อออก", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.close_app, Toast.LENGTH_SHORT).show()
         }
     }
 
