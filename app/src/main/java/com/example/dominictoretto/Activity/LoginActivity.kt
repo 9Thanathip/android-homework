@@ -27,7 +27,6 @@ class LoginActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
                 loginViewModel.onTextChange(s.toString())
-                loginViewModel.saveData(s.toString())
             }
         })
 
@@ -40,19 +39,14 @@ class LoginActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
-
-        loginViewModel.exitApp.observe(this) { shouldExit ->
-            if (shouldExit) {
-                super.onBackPressed()
-            } else {
-                Toast.makeText(this, R.string.close_app, Toast.LENGTH_SHORT).show()
-                loginViewModel.onBackPressed()
-            }
-        }
     }
 
-    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        loginViewModel.onBackPressed()
+        loginViewModel.checkCurrentTime(System.currentTimeMillis())
+        if (loginViewModel.backPressed.value) {
+            super.onBackPressed()
+        } else {
+            Toast.makeText(this, R.string.close_app, Toast.LENGTH_SHORT).show()
+        }
     }
 }

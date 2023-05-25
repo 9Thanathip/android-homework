@@ -1,7 +1,6 @@
 package com.example.dominictoretto.viewModel
 
 import android.content.Context
-import android.provider.Settings.Global.putString
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,6 +15,7 @@ class MovieActivityViewModel(private val movieActivityLoadData: MovieActivityLoa
 
     companion object {
         private const val PREF_NAME = "dataSave"
+        private var backPressedTime: Long = 0
     }
 
     private val _dataMovie = MutableStateFlow<Movie?>(null)
@@ -23,6 +23,9 @@ class MovieActivityViewModel(private val movieActivityLoadData: MovieActivityLoa
 
     private val _loading = MutableStateFlow(false)
     val loading: StateFlow<Boolean> = _loading
+
+    private val _backPressed = MutableStateFlow(false)
+    val backPressed: MutableStateFlow<Boolean> = _backPressed
 
     fun loadData() {
         viewModelScope.launch {
@@ -36,11 +39,20 @@ class MovieActivityViewModel(private val movieActivityLoadData: MovieActivityLoa
             }
         }
     }
-    fun saveData(context: Context,inputText: String) {
+
+    fun saveData(context: Context, inputText: String) {
         val sharedPref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         sharedPref.edit().apply {
             putString("key", inputText)
             apply()
+        }
+    }
+
+    fun checkCurrentTime(time: Long) {
+        if (time - LoginViewModel.backPressedTime < 2000) {
+            _backPressed.value = true
+        } else {
+            LoginViewModel.backPressedTime = time
         }
     }
 }

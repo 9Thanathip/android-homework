@@ -1,7 +1,6 @@
 package com.example.dominictoretto.Activity
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -19,8 +18,8 @@ class MovieInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = MovieInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        loadData()
         observeData()
+        movieInfoViewModel.loadData()
         binding.apply {
             backBottom.setOnClickListener {
                 onBackPressed()
@@ -52,16 +51,6 @@ class MovieInfoActivity : AppCompatActivity() {
         lifecycleScope.launch {
             movieInfoViewModel.loading.collect { isLoading ->
                 binding.progressAction.isVisible = isLoading
-            }
-        }
-    }
-
-    private fun loadData() {
-        lifecycleScope.launch {
-            try {
-                movieInfoViewModel.loadData()
-            } catch (e: Exception) {
-                Log.d("ddd", e.toString())
             }
         }
     }

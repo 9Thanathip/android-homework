@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -30,15 +29,15 @@ class MovieActivity : AppCompatActivity() {
         binding = MoviePageHolderBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupViews()
-        loadData()
+        observeData()
+        movieActivityViewModel.loadData()
     }
 
     override fun onBackPressed() {
-        val currentTime = System.currentTimeMillis()
-        if (currentTime - backPressedTime < 2000) {
+        movieActivityViewModel.checkCurrentTime(System.currentTimeMillis())
+        if (movieActivityViewModel.backPressed.value) {
             super.onBackPressed()
         } else {
-            backPressedTime = currentTime
             Toast.makeText(this, R.string.close_app, Toast.LENGTH_SHORT).show()
         }
     }
@@ -88,17 +87,6 @@ class MovieActivity : AppCompatActivity() {
         lifecycleScope.launch {
             movieActivityViewModel.loading.collect { isLoading ->
                 binding.progressAction.isVisible = isLoading
-            }
-        }
-    }
-
-    private fun loadData() {
-        lifecycleScope.launch {
-            try {
-                movieActivityViewModel.loadData()
-                observeData()
-            } catch (e: Exception) {
-                Log.d("ddd", e.toString())
             }
         }
     }

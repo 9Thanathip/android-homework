@@ -8,8 +8,8 @@ class LogoViewModel(context: Context) : ViewModel() {
         private const val PREF_NAME = "dataSave"
     }
 
-    fun loadSaveText(context: Context): String? {
+    fun loadSaveText(context: Context): Boolean {
         val sharedPref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        return sharedPref.getString("key", "")
+        return sharedPref.getString("key", "").isNullOrBlank()
     }
 }

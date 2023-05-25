@@ -13,16 +13,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class LogoActivity : AppCompatActivity() {
     private lateinit var binding: LogoBinding
     private val logoViewModel: LogoViewModel by viewModel()
-    private var saveText: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = LogoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        saveText = logoViewModel.loadSaveText(this)
 
         GlobalScope.launch {
             delay(3000)
-            if (saveText.isNullOrEmpty()) {
+            if (logoViewModel.loadSaveText(this@LogoActivity)) {
                 val intent = Intent(this@LogoActivity, LoginActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
