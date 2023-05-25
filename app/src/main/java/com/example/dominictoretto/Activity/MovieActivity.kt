@@ -22,7 +22,6 @@ class MovieActivity : AppCompatActivity() {
     private lateinit var binding: MoviePageHolderBinding
     private lateinit var movieViewHolder: MovieViewHolder
     private val movieActivityViewModel: MovieActivityViewModel by viewModel()
-    private var backPressedTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,10 +34,14 @@ class MovieActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         movieActivityViewModel.checkCurrentTime(System.currentTimeMillis())
-        if (movieActivityViewModel.backPressed.value) {
-            super.onBackPressed()
-        } else {
-            Toast.makeText(this, R.string.close_app, Toast.LENGTH_SHORT).show()
+        lifecycleScope.launch{
+            movieActivityViewModel.backPressed.collect{ isBack ->
+                if (isBack) {
+                    super.onBackPressed()
+                } else {
+                    Toast.makeText(this@MovieActivity, R.string.close_app, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
