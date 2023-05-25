@@ -1,6 +1,5 @@
 package com.example.dominictoretto.Activity
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -14,19 +13,16 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class LogoActivity : AppCompatActivity() {
     private lateinit var binding: LogoBinding
     private val logoViewModel: LogoViewModel by viewModel()
-    companion object{
-        const val PREF_NAME = "dataSave"
-    }
+    private var saveText: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = LogoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val sharedPref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        val savedText = sharedPref.getString("key", "")
+        saveText = logoViewModel.loadSaveText(this)
 
         GlobalScope.launch {
             delay(3000)
-            if (savedText.isNullOrEmpty()) {
+            if (saveText.isNullOrEmpty()) {
                 val intent = Intent(this@LogoActivity, LoginActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)

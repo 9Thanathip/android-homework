@@ -11,10 +11,10 @@ import com.example.dominictoretto.databinding.LoginPageBinding
 import com.example.dominictoretto.viewModel.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: LoginPageBinding
     private val loginViewModel: LoginViewModel by viewModel()
-    private var backPressedOnce = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +31,8 @@ class LoginActivity : AppCompatActivity() {
             }
         })
 
-        loginViewModel.isButtonVisible.observe(this) { isVisivle ->
-            binding.button.isVisible = isVisivle
+        loginViewModel.isButtonVisible.observe(this) { isShow ->
+            binding.button.isVisible = isShow
         }
 
         binding.button.setOnClickListener {
@@ -51,6 +51,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         loginViewModel.onBackPressed()
     }
