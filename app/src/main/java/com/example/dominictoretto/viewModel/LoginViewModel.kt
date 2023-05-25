@@ -8,7 +8,6 @@ class LoginViewModel(context: Context) : ViewModel() {
     companion object {
         private const val PREF_NAME = "dataSave"
         private val inputText = MutableLiveData<String>()
-        private var backPressedOnce = false
         private var backPressedCount = 0
     }
 

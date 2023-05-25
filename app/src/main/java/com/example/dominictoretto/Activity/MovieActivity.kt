@@ -57,11 +57,7 @@ class MovieActivity : AppCompatActivity() {
             }
 
             buttonLogout.setOnClickListener {
-                val sharedPref = getSharedPreferences("dataSave", MODE_PRIVATE)
-                with(sharedPref.edit()) {
-                    putString("key", "")
-                    apply()
-                }
+                movieActivityViewModel.saveData(this@MovieActivity,"")
                 val intent = Intent(this@MovieActivity, LoginActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
