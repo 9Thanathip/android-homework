@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -22,6 +24,7 @@ class MovieActivity : AppCompatActivity() {
     private lateinit var binding: MoviePageHolderBinding
     private lateinit var movieViewHolder: MovieViewHolder
     private val movieActivityViewModel: MovieActivityViewModel by viewModel()
+    private var backPressedOnce = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +32,16 @@ class MovieActivity : AppCompatActivity() {
         setContentView(binding.root)
         loadData()
         setupViews()
+    }
+
+    override fun onBackPressed() {
+        if(backPressedOnce){
+            super.onBackPressed()
+        } else {
+            backPressedOnce = true
+            Toast.makeText(this,"กดอีกครั้งเพื่อออก",Toast.LENGTH_SHORT).show()
+            Handler().postDelayed({ backPressedOnce = false }, 2000)
+        }
     }
 
     private fun setupViews() {
@@ -80,6 +93,11 @@ class MovieActivity : AppCompatActivity() {
                 }
             }
         }
+        lifecycleScope.launch {
+            movieActivityViewModel.loading.collect{ isLoading ->
+                binding.progressAction.isVisible = isLoading
+            }
+        }
     }
 
     private fun loadData() {
@@ -89,8 +107,6 @@ class MovieActivity : AppCompatActivity() {
                 observeData()
             } catch (e: Exception) {
                 Log.d("ddd", e.toString())
-            } finally {
-                binding.scrollView.isVisible = true
             }
         }
     }
