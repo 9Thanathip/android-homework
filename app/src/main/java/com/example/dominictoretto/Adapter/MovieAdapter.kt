@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dominictoretto.Extensions.loadImage
-import com.example.dominictoretto.data.infos
+import com.example.dominictoretto.data.Info
 import com.example.dominictoretto.databinding.ItemMovieBinding
 
 class MovieAdapter() :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    private var list: List<infos> = listOf()
+    private var list: List<Info> = listOf()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -39,7 +39,7 @@ class MovieAdapter() :
         return list.size
     }
 
-    fun setList(list: List<infos>) {
+    fun setList(list: List<Info>) {
         this.list = list
     }
 
