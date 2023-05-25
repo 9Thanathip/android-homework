@@ -7,9 +7,11 @@ import android.text.TextWatcher
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import com.example.dominictoretto.R
 import com.example.dominictoretto.databinding.LoginPageBinding
 import com.example.dominictoretto.viewModel.LoginViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @Suppress("DEPRECATION")
@@ -21,6 +23,14 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = LoginPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        observer()
+    }
+    private fun observer(){
+        lifecycleScope.launch {
+            loginViewModel.isButtonVisible.collect{ isShow ->
+                binding.button.isVisible = isShow
+            }
+        }
 
         binding.inputName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -30,11 +40,8 @@ class LoginActivity : AppCompatActivity() {
             }
         })
 
-        loginViewModel.isButtonVisible.observe(this) { isShow ->
-            binding.button.isVisible = isShow
-        }
-
         binding.button.setOnClickListener {
+            loginViewModel.onClick()
             val intent = Intent(this, MovieActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)

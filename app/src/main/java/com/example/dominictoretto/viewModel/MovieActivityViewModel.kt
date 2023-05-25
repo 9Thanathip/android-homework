@@ -15,8 +15,9 @@ class MovieActivityViewModel(private val movieActivityLoadData: MovieActivityLoa
 
     companion object {
         private const val PREF_NAME = "dataSave"
-        private var backPressedTime: Long = 0
     }
+
+    var backPressedTime: Long = 0
 
     private val _dataMovie = MutableStateFlow<Movie?>(null)
     val info: StateFlow<Movie?> = _dataMovie
@@ -49,10 +50,10 @@ class MovieActivityViewModel(private val movieActivityLoadData: MovieActivityLoa
     }
 
     fun checkCurrentTime(time: Long) {
-        if (time - LoginViewModel.backPressedTime < 2000) {
+        if (time - backPressedTime < 2000) {
             _backPressed.value = true
         } else {
-            LoginViewModel.backPressedTime = time
+            backPressedTime = time
         }
     }
 }
