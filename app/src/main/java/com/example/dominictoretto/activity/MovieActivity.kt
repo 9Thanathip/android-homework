@@ -10,10 +10,10 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dominictoretto.extensions.loadImage
 import com.example.dominictoretto.R
-import com.example.dominictoretto.viewHolder.MovieViewHolder
 import com.example.dominictoretto.databinding.MoviePageHolderBinding
+import com.example.dominictoretto.extensions.loadImage
+import com.example.dominictoretto.viewHolder.MovieViewHolder
 import com.example.dominictoretto.viewModel.MovieActivityViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -34,15 +34,7 @@ class MovieActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         movieActivityViewModel.checkCurrentTime(System.currentTimeMillis())
-        lifecycleScope.launch{
-            movieActivityViewModel.backPressed.collect{ isBack ->
-                if (isBack) {
-                    super.onBackPressed()
-                } else {
-                    Toast.makeText(this@MovieActivity, R.string.close_app, Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
+        Toast.makeText(this@MovieActivity, R.string.close_app, Toast.LENGTH_SHORT).show()
     }
 
     private fun setupViews() {
@@ -90,6 +82,11 @@ class MovieActivity : AppCompatActivity() {
         lifecycleScope.launch {
             movieActivityViewModel.loading.collect { isLoading ->
                 binding.progressAction.isVisible = isLoading
+            }
+        }
+        lifecycleScope.launch {
+            movieActivityViewModel.backPressed.collect { isBack ->
+                if (isBack) super.onBackPressed()
             }
         }
     }
