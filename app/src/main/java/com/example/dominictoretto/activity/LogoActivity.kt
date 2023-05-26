@@ -16,7 +16,7 @@ class LogoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = LogoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        logoViewModel.loadSaveText(this)
+        logoViewModel.loadSaveText()
         observeData()
     }
 

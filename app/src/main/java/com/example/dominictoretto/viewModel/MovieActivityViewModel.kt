@@ -1,6 +1,5 @@
 package com.example.dominictoretto.viewModel
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,7 +8,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class MovieActivityViewModel(private val movieActivityInterface: MovieActivityInterface) :
+class MovieActivityViewModel(
+    private val movieActivityInterface: MovieActivityInterface,
+    private val sharePreferencesInterface: SharePreferencesInterface
+) :
     ViewModel() {
 
     companion object {
@@ -40,12 +42,8 @@ class MovieActivityViewModel(private val movieActivityInterface: MovieActivityIn
         }
     }
 
-    fun saveData(context: Context, inputText: String) {
-        val sharedPref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        sharedPref.edit().apply {
-            putString("key", inputText)
-            apply()
-        }
+    suspend fun saveData(inputText: String) {
+        sharePreferencesInterface.putString("key", inputText)
     }
 
     fun checkCurrentTime(time: Long) {
