@@ -19,7 +19,7 @@ class LogoViewModel(private val sharePreferencesInterface: SharePreferencesInter
     fun loadSaveText() {
         viewModelScope.launch {
             delay(3000)
-            _checkLogin.value = sharePreferencesInterface.getString("key", "").isNullOrBlank()
+            _checkLogin.value = sharePreferencesInterface.getString("").isNullOrBlank()
         }
     }
 }

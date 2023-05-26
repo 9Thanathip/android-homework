@@ -59,6 +59,13 @@ class MovieActivity : AppCompatActivity() {
                 )
                 adapter = movieViewHolder
             }
+
+            binding.buttonLogout.setOnClickListener {
+                movieActivityViewModel.saveData("")
+                val intent = Intent(this@MovieActivity, LoginActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
         }
     }
 
@@ -82,14 +89,6 @@ class MovieActivity : AppCompatActivity() {
         lifecycleScope.launch {
             movieActivityViewModel.backPressed.collect { isBack ->
                 if (isBack) super.onBackPressed()
-            }
-        }
-        binding.buttonLogout.setOnClickListener {
-            lifecycleScope.launch {
-                movieActivityViewModel.saveData("")
-                val intent = Intent(this@MovieActivity, LoginActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
             }
         }
     }

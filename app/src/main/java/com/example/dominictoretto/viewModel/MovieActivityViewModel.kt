@@ -42,8 +42,8 @@ class MovieActivityViewModel(
         }
     }
 
-    suspend fun saveData(inputText: String) {
-        sharePreferencesInterface.putString("key", inputText)
+    fun saveData(inputText: String) {
+        sharePreferencesInterface.putString(inputText)
     }
 
     fun checkCurrentTime(time: Long) {

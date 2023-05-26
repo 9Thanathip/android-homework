@@ -30,8 +30,8 @@ class LoginViewModel(
         }
     }
 
-    suspend fun onClick() {
-        sharePreferencesInterface.putString("key", inputData)
+    fun onClick() {
+        sharePreferencesInterface.putString(inputData)
     }
 
     fun checkCurrentTime(time: Long) {
