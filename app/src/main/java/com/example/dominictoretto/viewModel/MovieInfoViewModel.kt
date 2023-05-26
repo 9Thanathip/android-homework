@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class MovieInfoViewModel(private val loadMovieData: LoadMovieData) : ViewModel() {
+class MovieInfoViewModel(private val movieInfoInterface: MovieInfoInterface) : ViewModel() {
 
     private val _movieInfo = MutableStateFlow(MovieInfo())
     val data: StateFlow<MovieInfo> = _movieInfo
@@ -24,8 +24,8 @@ class MovieInfoViewModel(private val loadMovieData: LoadMovieData) : ViewModel()
         viewModelScope.launch {
             try {
                 _loading.value = true
-                val movieDeferred = async { loadMovieData.getDataInfo1() }
-                val dataMovieDeferred = async { loadMovieData.getDataInfo2() }
+                val movieDeferred = async { movieInfoInterface.getDataInfo1() }
+                val dataMovieDeferred = async { movieInfoInterface.getDataInfo2() }
 
                 val movie = movieDeferred.await()
                 val dataMovie = dataMovieDeferred.await()
@@ -35,6 +35,6 @@ class MovieInfoViewModel(private val loadMovieData: LoadMovieData) : ViewModel()
             } finally {
                 _loading.value = false
             }
-        }
+         }
     }
 }

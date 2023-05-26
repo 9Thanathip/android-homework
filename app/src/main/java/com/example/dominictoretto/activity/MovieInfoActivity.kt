@@ -1,10 +1,10 @@
-package com.example.dominictoretto.Activity
+package com.example.dominictoretto.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import com.example.dominictoretto.Extensions.loadImage
+import com.example.dominictoretto.extensions.loadImage
 import com.example.dominictoretto.databinding.MovieInfoBinding
 import com.example.dominictoretto.viewModel.MovieInfoViewModel
 import kotlinx.coroutines.launch

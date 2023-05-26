@@ -1,10 +1,10 @@
-package com.example.dominictoretto.ViewHolder
+package com.example.dominictoretto.viewHolder
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dominictoretto.Adapter.MovieAdapter
+import com.example.dominictoretto.adapter.MovieAdapter
 import com.example.dominictoretto.data.Content
 import com.example.dominictoretto.databinding.MovieViewHolderBinding
 

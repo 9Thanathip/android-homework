@@ -1,4 +1,4 @@
-package com.example.dominictoretto.Activity
+package com.example.dominictoretto.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -10,9 +10,9 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dominictoretto.Extensions.loadImage
+import com.example.dominictoretto.extensions.loadImage
 import com.example.dominictoretto.R
-import com.example.dominictoretto.ViewHolder.MovieViewHolder
+import com.example.dominictoretto.viewHolder.MovieViewHolder
 import com.example.dominictoretto.databinding.MoviePageHolderBinding
 import com.example.dominictoretto.viewModel.MovieActivityViewModel
 import kotlinx.coroutines.launch

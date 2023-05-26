@@ -5,12 +5,11 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dominictoretto.data.Movie
-import com.example.dominictoretto.data.MovieActivityLoadData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class MovieActivityViewModel(private val movieActivityLoadData: MovieActivityLoadData) :
+class MovieActivityViewModel(private val movieActivityInterface: MovieActivityInterface) :
     ViewModel() {
 
     companion object {
@@ -32,7 +31,7 @@ class MovieActivityViewModel(private val movieActivityLoadData: MovieActivityLoa
         viewModelScope.launch {
             try {
                 _loading.value = true
-                _dataMovie.value = movieActivityLoadData.getMovie2()
+                _dataMovie.value = movieActivityInterface.getMovie2()
             } catch (e: Exception) {
                 Log.d("ddd", e.toString())
             } finally {

@@ -1,16 +1,18 @@
 package com.example.dominictoretto.data
 
+import com.example.dominictoretto.viewModel.MovieInfoInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class LoadMovieData(private val movieApiResponse:MovieApiResponse) {
-    suspend fun getDataInfo1():MovieInfo{
+class LoadMovieData(private val movieApiResponse: MovieApiResponse) : MovieInfoInterface {
+    override suspend fun getDataInfo1(): MovieInfo {
         return withContext(Dispatchers.IO) {
             movieApiResponse.apiService.getDataInfoFirst()
         }
     }
-    suspend fun getDataInfo2():MovieInfo{
-        return withContext(Dispatchers.IO){
+
+    override suspend fun getDataInfo2(): MovieInfo {
+        return withContext(Dispatchers.IO) {
             movieApiResponse.apiService.getDataInfoSecond()
         }
     }
