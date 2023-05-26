@@ -41,10 +41,10 @@ class LoginActivity : AppCompatActivity() {
         })
 
         binding.button.setOnClickListener {
-            loginViewModel.onClick()
-            val intent = Intent(this, MovieActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+                loginViewModel.onClick()
+                val intent = Intent(this@LoginActivity, MovieActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
         }
     }
 
