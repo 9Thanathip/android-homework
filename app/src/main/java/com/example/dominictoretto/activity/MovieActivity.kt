@@ -18,6 +18,7 @@ import com.example.dominictoretto.viewModel.MovieActivityViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@Suppress("DEPRECATION")
 class MovieActivity : AppCompatActivity() {
     private lateinit var binding: MoviePageHolderBinding
     private lateinit var movieViewHolder: MovieViewHolder
@@ -32,6 +33,7 @@ class MovieActivity : AppCompatActivity() {
         movieActivityViewModel.loadData()
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         movieActivityViewModel.checkCurrentTime(System.currentTimeMillis())
         Toast.makeText(this@MovieActivity, R.string.close_app, Toast.LENGTH_SHORT).show()

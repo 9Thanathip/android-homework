@@ -48,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         loginViewModel.checkCurrentTime(System.currentTimeMillis())
         if (loginViewModel.backPressed.value) {

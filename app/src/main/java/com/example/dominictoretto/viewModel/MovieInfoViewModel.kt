@@ -2,7 +2,6 @@ package com.example.dominictoretto.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.dominictoretto.data.LoadMovieData
 import com.example.dominictoretto.data.MovieInfo
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,6 +34,6 @@ class MovieInfoViewModel(private val movieInfoInterface: MovieInfoInterface) : V
             } finally {
                 _loading.value = false
             }
-         }
+        }
     }
 }

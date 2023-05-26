@@ -30,7 +30,7 @@ class MovieAdapter() :
         holder.binding.apply {
             movieImage.loadImage(item.image)
             movieEpisode.isVisible = item.isEpisode
-            movieTitle.isVisible = !item.name.isNullOrBlank()
+            movieTitle.isVisible = !item.name.isBlank()
             movieTitle.text = item.name
         }
     }

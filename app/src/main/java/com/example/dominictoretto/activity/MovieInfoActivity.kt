@@ -10,6 +10,7 @@ import com.example.dominictoretto.viewModel.MovieInfoViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@Suppress("DEPRECATION")
 class MovieInfoActivity : AppCompatActivity() {
     private lateinit var binding: MovieInfoBinding
     private val movieInfoViewModel: MovieInfoViewModel by viewModel()

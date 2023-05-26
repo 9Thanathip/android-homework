@@ -38,6 +38,7 @@ class LogoActivity : AppCompatActivity() {
         }
     }
 
+    @Deprecated("Deprecated in Java", ReplaceWith("finish()"))
     override fun onBackPressed() {
         finish()
     }
